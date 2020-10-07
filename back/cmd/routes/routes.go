@@ -10,6 +10,7 @@ import (
 func Routes(router *gin.Engine) {
 	router.GET("/", hello)
 	router.GET("/projects", controllers.GetAllProjects)
+	router.NoRoute(notFound)
 }
 
 func hello(c *gin.Context) {

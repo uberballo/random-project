@@ -27,7 +27,10 @@ func ProjectCollection(c *mongo.Database) {
 
 func GetAllProjects(c *gin.Context) {
 	projects := []Project{}
-	cursor, err := collection.Find(context.TODO(), bson.M{})
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	cursor, err := collection.Find(ctx, bson.M{})
+	defer cursor.Close(ctx)
 
 	if err != nil {
 		log.Printf("Error while getting all projects, Reason: %v\n", err)
@@ -38,7 +41,7 @@ func GetAllProjects(c *gin.Context) {
 		return
 	}
 
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(ctx) {
 		var project Project
 		cursor.Decode(&project)
 		projects = append(projects, project)

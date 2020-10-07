@@ -12,18 +12,17 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var colelction *mongo.Collection
-var ctx = context.TODO()
-
 func Connect() {
 	fmt.Println("init")
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/")
-	client, err := mongo.NewClient(clientOptions)
+	clientOptions := options.Client().ApplyURI("mongodb://root:rootpassword@mongo:27017")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-
-	err = client.Connect(ctx)
 	defer cancel()
+
+	client, err := mongo.Connect(ctx, clientOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	err = client.Ping(context.Background(), readpref.Primary())
 	if err != nil {

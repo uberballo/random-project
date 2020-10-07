@@ -1,16 +1,5 @@
 version: "3.7"
 services:
-  front:
-    build:
-      context: ./front
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
-    stdin_open: true
-    volumes:
-      - "./front:/app"
-      - "/node_modules"
-
   back:
     build:
       context: ./back
@@ -18,9 +7,9 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - mongodb_container
+      - mongo
 
-  mongodb_container:
+  mongo:
     image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
