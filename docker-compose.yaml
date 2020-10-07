@@ -4,10 +4,13 @@ services:
     build:
       context: ./back
       dockerfile: ./Dockerfile
+    image: back:latest
     ports:
       - "3001:3001"
     depends_on:
       - mongo
+    volumes:
+      - ./:/app
 
   mongo:
     image: mongo:latest

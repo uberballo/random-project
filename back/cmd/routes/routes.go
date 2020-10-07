@@ -9,7 +9,9 @@ import (
 
 func Routes(router *gin.Engine) {
 	router.GET("/", hello)
+	router.GET("/asd", hello)
 	router.GET("/projects", controllers.GetAllProjects)
+	router.POST("/projects", controllers.CreateProject)
 	router.NoRoute(notFound)
 }
 

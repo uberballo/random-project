@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gobwas/pool v0.2.1 // indirect
 	github.com/gobwas/ws v1.0.3 // indirect
+	github.com/google/uuid v1.1.2
 	github.com/joho/godotenv v1.3.0
 	github.com/mailru/easyjson v0.7.3 // indirect
 	github.com/uberballo/web-scraper v0.0.0-20200816100844-6419f11d6d8d

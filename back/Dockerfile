@@ -1,14 +1,16 @@
-FROM golang:1.15.0-alpine3.12
+FROM golang:latest
 
-RUN mkdir /app
 
-ADD . /app
+WORKDIR /app/back
 
-WORKDIR /app
+copy ./ /app 
+
+
+
 
 RUN go mod download
-RUN go build -o main ./cmd/.
 
-EXPOSE 3001:3001
+RUN ["go", "get", "github.com/githubnemo/CompileDaemon"]
 
-CMD ["/app/main"]
+
+ENTRYPOINT CompileDaemon -log-prefix=true --build="go build cmd/main.go"  --command=./main

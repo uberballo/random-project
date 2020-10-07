@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	guuid "github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -51,6 +52,37 @@ func GetAllProjects(c *gin.Context) {
 		"status":  http.StatusOK,
 		"message": "All projects",
 		"data":    projects,
+	})
+	return
+}
+
+func CreateProject(c *gin.Context) {
+	var project Project
+	c.BindJSON(&project)
+	title := project.Title
+	body := project.Body
+	id := guuid.New().String()
+	newProject := Project{
+		ID:        id,
+		Title:     title,
+		Body:      body,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+	_, err := collection.InsertOne(context.TODO(), newProject)
+
+	if err != nil {
+		log.Printf("Error while inserting new project into db, Reason: %v\n", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  http.StatusInternalServerError,
+			"message": "Something went wrong",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusCreated,
+		"message": "Project created successfully",
 	})
 	return
 }
