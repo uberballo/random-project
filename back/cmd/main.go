@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/uberballo/stockservice/cmd/db"
-	"github.com/uberballo/stockservice/cmd/routes"
+	"github.com/uberballo/random-project/cmd/db"
+	"github.com/uberballo/random-project/cmd/routes"
 )
 
 func init() {

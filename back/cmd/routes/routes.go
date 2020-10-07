@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/uberballo/stockservice/cmd/controllers"
+	"github.com/uberballo/random-project/cmd/controllers"
 )
 
 func Routes(router *gin.Engine) {
