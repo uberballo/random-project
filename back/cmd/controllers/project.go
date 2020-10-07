@@ -56,6 +56,28 @@ func GetAllProjects(c *gin.Context) {
 	return
 }
 
+func GetProject(c *gin.Context) {
+	projectID := c.Param("projectID")
+
+	project := Project{}
+	err := collection.FindOne(context.TODO(), bson.M{"id": projectID}).Decode(&project)
+	if err != nil {
+		log.Printf("Error while getting a single project, Reason: %v\n", err)
+		c.JSON(http.StatusNotFound, gin.H{
+			"status":  http.StatusNotFound,
+			"message": "Project not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusOK,
+		"message": "Single project",
+		"data":    project,
+	})
+	return
+}
+
 func CreateProject(c *gin.Context) {
 	var project Project
 	c.BindJSON(&project)
@@ -85,4 +107,31 @@ func CreateProject(c *gin.Context) {
 		"message": "Project created successfully",
 	})
 	return
+}
+func DeleteProject(c *gin.Context) {
+	projectID := c.Param("projectID")
+
+	_, err := collection.DeleteOne(context.TODO(), bson.M{"id": projectID})
+	if err != nil {
+		log.Printf("Error while deleting a single project, Reason: %v\n", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  http.StatusInternalServerError,
+			"message": "Something went wrong",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusOK,
+		"message": "project deleted successfully",
+	})
+	return
+}
+
+func EditProject(c *gin.Context) {
+	//projectID := c.Param("projectID")
+	var project Project
+	c.BindJSON(&project)
+	log.Println(c.Params)
+
 }
