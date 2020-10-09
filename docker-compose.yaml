@@ -1,10 +1,27 @@
 version: "3.7"
 services:
+  front:
+    image: front:latest
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    networks:
+      - frontBack
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    volumes:
+      - "./front:/home/node/app"
+      - "/app/node_modules"
+
   back:
     build:
       context: ./back
       dockerfile: ./Dockerfile
     image: back:latest
+    networks:
+      - frontBack
+      - mongo
     ports:
       - "3001:3001"
     depends_on:
@@ -17,10 +34,18 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    networks:
+      - mongo
     ports:
       - 27017:27017
     volumes:
       - mongodb_data_container:/data/db
+
+networks:
+  mongo:
+    name: mongo
+  frontBack:
+    name: frontBack
 
 volumes:
   mongodb_data_container:

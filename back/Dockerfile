@@ -6,7 +6,7 @@ WORKDIR /app/back
 copy ./ /app 
 
 
-
+EXPOSE 3001
 
 RUN go mod download
 

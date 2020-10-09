@@ -83,6 +83,7 @@ func CreateProject(c *gin.Context) {
 	c.BindJSON(&project)
 	title := project.Title
 	body := project.Body
+
 	id := guuid.New().String()
 	newProject := Project{
 		ID:        id,
