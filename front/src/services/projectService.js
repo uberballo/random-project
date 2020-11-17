@@ -25,13 +25,12 @@ const createProject = async newProject => {
       Body: newProject.body,
     })
   )
-  console.log(res)
   return res
 }
 
-const removePerson = async id => {
+const removeProject = async id => {
   const res = await tryCatchWrapper(() => axios.delete(`${baseUrl}/${id}`))
   return res
 }
 
-export default { getProjects, createProject }
+export default { getProjects, createProject, removeProject }
