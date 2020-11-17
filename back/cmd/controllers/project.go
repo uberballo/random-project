@@ -106,6 +106,7 @@ func CreateProject(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  http.StatusCreated,
 		"message": "Project created successfully",
+		"project": newProject,
 	})
 	return
 }

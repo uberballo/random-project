@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className="App">
       <p>hello</p>
-      <ProjectContainer/>
+      <ProjectContainer />
     </div>
   )
 }

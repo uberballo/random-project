@@ -13,10 +13,9 @@ const tryCatchWrapper = async func => {
   }
 }
 
-const getProjects= async () => {
+const getProjects = async () => {
   const res = await tryCatchWrapper(() => axios.get(baseUrl))
-  console.log(res)
-  return res
+  return res.data
 }
 
 const createProject = async newProject => {
@@ -35,4 +34,4 @@ const removePerson = async id => {
   return res
 }
 
-export default { getProjects, createProject}
+export default { getProjects, createProject }

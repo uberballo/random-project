@@ -25,11 +25,11 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - mongo
+      - mongodb
     volumes:
       - ./:/app
 
-  mongo:
+  mongodb:
     image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root

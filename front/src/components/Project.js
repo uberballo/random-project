@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/person.css'
 
-const Project= ({project}) => {
+const Project = ({ project }) => {
   return (
     <div className="project">
       <p className="projectTitle">{project.title}</p>

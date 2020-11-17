@@ -10,12 +10,12 @@ import (
 func Routes(router *gin.Engine) {
 
 	router.GET("/", hello)
-	api := router.Group("/api/projects")
+	api := router.Group("/api")
 	{
-		api.GET("/", controllers.GetAllProjects)
-		api.GET("/:projectID", controllers.GetProject)
-		api.DELETE("/:projectID", controllers.DeleteProject)
-		api.POST("/", controllers.CreateProject)
+		api.GET("/projects", controllers.GetAllProjects)
+		api.GET("/projects:projectID", controllers.GetProject)
+		api.DELETE("/projects:projectID", controllers.DeleteProject)
+		api.POST("/projects", controllers.CreateProject)
 	}
 	router.NoRoute(notFound)
 }

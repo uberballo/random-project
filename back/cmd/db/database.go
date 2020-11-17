@@ -14,7 +14,7 @@ import (
 
 func Connect() {
 	fmt.Println("init")
-	clientOptions := options.Client().ApplyURI("mongodb://root:rootpassword@mongo:27017")
+	clientOptions := options.Client().ApplyURI("mongodb://root:rootpassword@mongodb:27017")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
