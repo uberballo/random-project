@@ -6,15 +6,17 @@ import Project from './Project'
 import {
   ADD_NEW_PROJECT, REMOVE_PROJECT,
 } from '../constants/ActionTypes'
+import RandomProject from './SingleProject'
+import SingleProject from './SingleProject'
 
 const ProjectContainer = () => {
   const projects = useSelector(state => state)
+  const [randomProject, setRandomProject] = useState({})
   const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetchData() {
       const result = await projectService.getProjects()
-      console.log(result)
       if (!result.error) {
         dispatch({ type: ADD_NEW_PROJECT, data: result.data })
       }
@@ -28,6 +30,12 @@ const ProjectContainer = () => {
     if (res.status !== 200) return
     dispatch({ type: REMOVE_PROJECT, filter: projectId })
   }
+
+  const getRandomProject = () => {
+    const project = projects[Math.floor(Math.random() * projects.length)]
+    setRandomProject(project)
+  }
+
   const projectRow = () => {
     return projects?.map(project => (
       <Project project={project} key={project.id} removeProject={removeProject} />
@@ -36,6 +44,8 @@ const ProjectContainer = () => {
 
   return (
     <div>
+      <button onClick={() => getRandomProject()}>random</button>
+      {randomProject ? <SingleProject project={randomProject} /> : null}
       <NewProjectContainer />
       <ul>{projectRow()}</ul>
     </div>
