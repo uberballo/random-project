@@ -4,9 +4,7 @@ import useField from '../helpers/useField'
 import projectService from '../services/projectService'
 import { useDispatch } from 'react-redux'
 
-import {
-  ADD_NEW_PROJECT,
-} from '../constants/ActionTypes'
+import { ADD_NEW_PROJECT } from '../constants/ActionTypes'
 
 const NewProjectContainer = () => {
   const title = useField('text')
@@ -15,10 +13,10 @@ const NewProjectContainer = () => {
   const dispatch = useDispatch()
 
   const resetFields = (fields) => {
-    fields.forEach(field => field.reset())
+    fields.forEach((field) => field.reset())
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const newProject = { title: title.value, body: body.value }
@@ -30,7 +28,14 @@ const NewProjectContainer = () => {
     resetFields([title, body])
   }
 
-  return <ProjectForm handleSubmit={handleSubmit} title={title} description={description} body={body} />
+  return (
+    <ProjectForm
+      handleSubmit={handleSubmit}
+      title={title}
+      description={description}
+      body={body}
+    />
+  )
 }
 
-export default NewProjectContainer 
+export default NewProjectContainer

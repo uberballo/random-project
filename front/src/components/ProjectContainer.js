@@ -6,7 +6,7 @@ import Project from './Project'
 import SingleProject from './SingleProject'
 
 const ProjectContainer = () => {
-  const projects = useSelector(state => state)
+  const projects = useSelector((state) => state)
   const [randomProject, setRandomProject] = useState({})
   const dispatch = useDispatch()
 
@@ -22,8 +22,12 @@ const ProjectContainer = () => {
   }
 
   const projectRow = () => {
-    return projects?.map(project => (
-      <Project project={project} key={project.id} removeProject={removeProject} />
+    return projects?.map((project) => (
+      <Project
+        project={project}
+        key={project.id}
+        removeProject={removeProject}
+      />
     ))
   }
 

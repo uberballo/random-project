@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Link, Route, Switch
-} from "react-router-dom";
-import NewProjectContainer from './components/NewProjectContainer';
-import ProjectContainer from './components/ProjectContainer';
-import { ADD_NEW_PROJECT } from './constants/ActionTypes';
-import projectService from './services/projectService';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import NewProjectContainer from './components/NewProjectContainer'
+import ProjectContainer from './components/ProjectContainer'
+import { ADD_NEW_PROJECT } from './constants/ActionTypes'
+import projectService from './services/projectService'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -25,7 +22,7 @@ const App = () => {
   }, [])
   return (
     <Router>
-      <div >
+      <div>
         <nav>
           <ul>
             <li>
@@ -46,9 +43,8 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </Router >
+    </Router>
   )
 }
-
 
 export default App

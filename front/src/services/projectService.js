@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseUrl = '/api/projects'
 
-const tryCatchWrapper = async func => {
+const tryCatchWrapper = async (func) => {
   try {
     const res = await func()
     return res
@@ -18,7 +18,7 @@ const getProjects = async () => {
   return res.data
 }
 
-const createProject = async newProject => {
+const createProject = async (newProject) => {
   const res = await tryCatchWrapper(() =>
     axios.post(baseUrl, {
       Title: newProject.title,
@@ -28,7 +28,7 @@ const createProject = async newProject => {
   return res
 }
 
-const removeProject = async id => {
+const removeProject = async (id) => {
   const res = await tryCatchWrapper(() => axios.delete(`${baseUrl}/${id}`))
   return res
 }

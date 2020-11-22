@@ -5,15 +5,27 @@ const ProjectForm = ({ title, body, description, handleSubmit }) => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Title:</label>
-        <input placeholder={'Enter project name here!'} value={title.value} onChange={title.onChange} />
+        <input
+          placeholder={'Enter project name here!'}
+          value={title.value}
+          onChange={title.onChange}
+        />
         <label>Description:</label>
-        <input placeholder={'Enter short project description here'} value={description.value} onChange={description.onChange} />
+        <input
+          placeholder={'Enter short project description here'}
+          value={description.value}
+          onChange={description.onChange}
+        />
         <label>Body:</label>
-        <input placeholder={'Explain the project here: '} value={body.value} onChange={body.onChange} />
+        <input
+          placeholder={'Explain the project here: '}
+          value={body.value}
+          onChange={body.onChange}
+        />
       </div>
       <button type="submit">Submit</button>
     </form>
   )
 }
 
-export default ProjectForm 
+export default ProjectForm
