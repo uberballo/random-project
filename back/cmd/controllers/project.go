@@ -13,11 +13,12 @@ import (
 )
 
 type Project struct {
-	ID        string    `json:"id"`
-	Title     string    `json:"title"`
-	Body      string    `json:"body"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID          string    `json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Body        string    `json:"body"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 var collection *mongo.Collection
@@ -83,14 +84,16 @@ func CreateProject(c *gin.Context) {
 	c.BindJSON(&project)
 	title := project.Title
 	body := project.Body
+	description := project.Description
 
 	id := guuid.New().String()
 	newProject := Project{
-		ID:        id,
-		Title:     title,
-		Body:      body,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		ID:          id,
+		Title:       title,
+		Body:        body,
+		Description: description,
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
 	}
 	_, err := collection.InsertOne(context.TODO(), newProject)
 

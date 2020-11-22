@@ -8,9 +8,10 @@ import {
   ADD_NEW_PROJECT,
 } from '../constants/ActionTypes'
 
-const NewProjectContainer = ({ projects, setProjects }) => {
+const NewProjectContainer = () => {
   const title = useField('text')
   const body = useField('text')
+  const description = useField('text')
   const dispatch = useDispatch()
 
   const resetFields = (fields) => {
@@ -29,7 +30,7 @@ const NewProjectContainer = ({ projects, setProjects }) => {
     resetFields([title, body])
   }
 
-  return <ProjectForm handleSubmit={handleSubmit} title={title} body={body} />
+  return <ProjectForm handleSubmit={handleSubmit} title={title} description={description} body={body} />
 }
 
 export default NewProjectContainer 

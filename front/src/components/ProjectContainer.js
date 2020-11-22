@@ -1,29 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import projectService from '../services/projectService'
-import NewProjectContainer from './NewProjectContainer'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { REMOVE_PROJECT } from '../constants/ActionTypes'
+import projectService from '../services/projectService'
 import Project from './Project'
-import {
-  ADD_NEW_PROJECT, REMOVE_PROJECT,
-} from '../constants/ActionTypes'
-import RandomProject from './SingleProject'
 import SingleProject from './SingleProject'
 
 const ProjectContainer = () => {
   const projects = useSelector(state => state)
   const [randomProject, setRandomProject] = useState({})
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await projectService.getProjects()
-      if (!result.error) {
-        dispatch({ type: ADD_NEW_PROJECT, data: result.data })
-      }
-    }
-
-    fetchData()
-  }, [])
 
   const removeProject = async (projectId) => {
     const res = await projectService.removeProject(projectId)
@@ -46,7 +31,6 @@ const ProjectContainer = () => {
     <div>
       <button onClick={() => getRandomProject()}>random</button>
       {randomProject ? <SingleProject project={randomProject} /> : null}
-      <NewProjectContainer />
       <ul>{projectRow()}</ul>
     </div>
   )
