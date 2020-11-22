@@ -1,0 +1,7 @@
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    border-style: solid;
+    margin: 10px;
+}
