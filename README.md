@@ -1,5 +1,5 @@
-# stock-service  
-Shows information about stocks. Uses my [web-scraper](https://github.com/uberballo/web-scraper) to collect data.  
+# Random project
+Random project web application. 
 
 ## How to run  
-run `docker-compose up`. Add .env
+run `docker-compose up`. 
