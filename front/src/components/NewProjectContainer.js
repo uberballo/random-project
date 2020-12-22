@@ -23,7 +23,7 @@ const NewProjectContainer = () => {
     const res = await projectService.createProject(newProject)
 
     if (res.error) return
-    const addedProject = res.data.project
+    const addedProject = res.data.data
     dispatch({ type: ADD_NEW_PROJECT, data: addedProject })
     resetFields([title, body])
   }

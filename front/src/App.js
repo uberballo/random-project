@@ -12,9 +12,10 @@ const App = () => {
   useEffect(() => {
     async function fetchData() {
       const result = await projectService.getProjects()
+      const projects = result.data.projects
       console.log(result)
       if (!result.error) {
-        dispatch({ type: ADD_NEW_PROJECT, data: result.data })
+        dispatch({ type: ADD_NEW_PROJECT, data: projects })
       }
     }
 

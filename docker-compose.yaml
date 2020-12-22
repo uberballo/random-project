@@ -21,31 +21,30 @@ services:
     image: back:latest
     networks:
       - frontBack
-      - mongo
     ports:
       - "3001:3001"
     depends_on:
-      - mongodb
+      - postgres-db
     volumes:
       - ./:/app
 
-  mongodb:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
-    networks:
-      - mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb_data_container:/data/db
+  postgres-db:
+     image: postgres
+     volumes:
+       - database-data:/var/lib/postgresql/data/project
+     environment:
+       POSTGRES_PASSWORD: root
+       POSTGRES_DB: project
+       POSTGRES_USER: root
+       PGDATA: /var/lib/postgresql/data/project
+     ports:
+        - 5432:5432
+     networks:
+      - frontBack
 
 networks:
-  mongo:
-    name: mongo
   frontBack:
-    name: frontBack
+    driver: bridge
 
 volumes:
-  mongodb_data_container:
+    database-data: 
