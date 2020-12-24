@@ -12,10 +12,10 @@ import (
 
 func GetProjects(c *gin.Context) {
 	projects := project_service.GetProjects()
-	app := app.Gin{C: c}
+	appG := app.Gin{C: c}
 	data := make(map[string]interface{})
 	data["projects"] = projects
-	app.Response(
+	appG.Response(
 		http.StatusOK,
 		1,
 		data)
@@ -48,5 +48,18 @@ func CreateProject(c *gin.Context) {
 	}
 	fmt.Println()
 	appG.Response(http.StatusOK, e.SUCCESS, createdProject)
+}
+
+func DeleteProject(c *gin.Context) {
+	appG := app.Gin{C: c}
+	id := appG.C.Param("id")
+	fmt.Println("id: ", id)
+	err := project_service.Delete(id)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
+		return
+	}
+	fmt.Println()
+	appG.Response(http.StatusOK, e.SUCCESS, nil)
 
 }

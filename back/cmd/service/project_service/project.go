@@ -28,3 +28,8 @@ func (p *Project) Create() (*models.Project, error) {
 	createdProject, err := models.CreateProject(project)
 	return createdProject, err
 }
+
+func Delete(id string) error {
+	models.DeleteProject(id)
+	return nil
+}

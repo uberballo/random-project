@@ -2,7 +2,7 @@ import { ADD_NEW_PROJECT, REMOVE_PROJECT } from '../constants/ActionTypes'
 
 const removeProjectFromState = (state, action) => {
   const toRemoveId = action.filter
-  const filteredState = state.filter((project) => project.id !== toRemoveId)
+  const filteredState = state.filter((project) => project.ID !== toRemoveId)
   return filteredState
 }
 

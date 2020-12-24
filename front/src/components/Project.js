@@ -6,7 +6,7 @@ const Project = ({ project, removeProject }) => {
     <div className="project-item">
       <p className="project-title">{project.title}</p>
       <p className="project-description">{project.description}</p>
-      <button onClick={() => removeProject(project.id)}>X</button>
+      <button onClick={() => removeProject(project.ID)}>X</button>
     </div>
   )
 }

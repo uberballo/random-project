@@ -13,7 +13,8 @@ func Routes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
 		api.GET("/projects", v1.GetProjects)
-		api.POST("/projects/", v1.CreateProject)
+		api.POST("/projects", v1.CreateProject)
+		api.DELETE("/projects/:id", v1.DeleteProject)
 	}
 	router.NoRoute(notFound)
 }

@@ -12,6 +12,8 @@ const ProjectContainer = () => {
 
   const removeProject = async (projectId) => {
     const res = await projectService.removeProject(projectId)
+    console.log(res)
+    console.log(res.status)
     if (res.status !== 200) return
     dispatch({ type: REMOVE_PROJECT, filter: projectId })
   }
@@ -25,7 +27,7 @@ const ProjectContainer = () => {
     return projects?.map((project) => (
       <Project
         project={project}
-        key={project.id}
+        key={project.ID}
         removeProject={removeProject}
       />
     ))
