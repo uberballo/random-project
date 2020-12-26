@@ -5,3 +5,7 @@
   border-style: solid;
   margin: 10px;
 }
+
+.remove-button {
+  float: right;
+}

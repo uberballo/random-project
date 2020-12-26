@@ -19,7 +19,11 @@ const NewProjectContainer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const newProject = { title: title.value, body: body.value }
+    const newProject = {
+      title: title.value,
+      description: description.value,
+      body: body.value,
+    }
     const res = await projectService.createProject(newProject)
 
     if (res.error) return

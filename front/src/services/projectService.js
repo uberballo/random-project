@@ -22,6 +22,7 @@ const createProject = async (newProject) => {
   const res = await tryCatchWrapper(() =>
     axios.post(baseUrl, {
       Title: newProject.title,
+      Description: newProject.description,
       Body: newProject.body,
     })
   )

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
+import Header from './components/Header'
 import NewProjectContainer from './components/NewProjectContainer'
 import ProjectContainer from './components/ProjectContainer'
 import { ADD_NEW_PROJECT } from './constants/ActionTypes'
 import projectService from './services/projectService'
-import 'semantic-ui-css/semantic.min.css'
+import { Container } from 'semantic-ui-react'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -24,18 +26,8 @@ const App = () => {
   }, [])
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Projects</Link>
-            </li>
-            <li>
-              <Link to="/project/new">New project</Link>
-            </li>
-          </ul>
-        </nav>
-
+      <Header />
+      <Container>
         <Switch>
           <Route path="/project/new">
             <NewProjectContainer />
@@ -44,7 +36,7 @@ const App = () => {
             <ProjectContainer />
           </Route>
         </Switch>
-      </div>
+      </Container>
     </Router>
   )
 }

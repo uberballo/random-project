@@ -4,6 +4,7 @@ import { REMOVE_PROJECT } from '../constants/ActionTypes'
 import projectService from '../services/projectService'
 import Project from './Project'
 import SingleProject from './SingleProject'
+import { List } from 'semantic-ui-react'
 
 const ProjectContainer = () => {
   const projects = useSelector((state) => state)
@@ -37,7 +38,9 @@ const ProjectContainer = () => {
     <div>
       <button onClick={() => getRandomProject()}>random</button>
       {randomProject ? <SingleProject project={randomProject} /> : null}
-      <ul>{projectRow()}</ul>
+      <List divided relaxed size="large">
+        {projectRow()}
+      </List>
     </div>
   )
 }
