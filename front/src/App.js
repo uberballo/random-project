@@ -8,6 +8,7 @@ import ProjectContainer from './components/ProjectContainer'
 import { ADD_NEW_PROJECT } from './constants/ActionTypes'
 import projectService from './services/projectService'
 import { Container } from 'semantic-ui-react'
+import SingleProject from './components/SingleProject'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -29,11 +30,14 @@ const App = () => {
       <Header />
       <Container>
         <Switch>
-          <Route path="/project/new">
+          <Route exact path="/project/new">
             <NewProjectContainer />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <ProjectContainer />
+          </Route>
+          <Route path="/project/:projectID">
+            <SingleProject />
           </Route>
         </Switch>
       </Container>

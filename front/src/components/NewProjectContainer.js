@@ -1,10 +1,9 @@
 import React from 'react'
-import ProjectForm from './ProjectForm'
+import { useDispatch } from 'react-redux'
+import { ADD_NEW_PROJECT } from '../constants/ActionTypes'
 import useField from '../helpers/useField'
 import projectService from '../services/projectService'
-import { useDispatch } from 'react-redux'
-
-import { ADD_NEW_PROJECT } from '../constants/ActionTypes'
+import ProjectForm from './ProjectForm'
 
 const NewProjectContainer = () => {
   const title = useField('text')

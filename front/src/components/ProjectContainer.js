@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { List } from 'semantic-ui-react'
 import { REMOVE_PROJECT } from '../constants/ActionTypes'
 import projectService from '../services/projectService'
 import Project from './Project'
-import SingleProject from './SingleProject'
-import { List } from 'semantic-ui-react'
+import RandomProjectCard from './RandomProjectCard'
 
 const ProjectContainer = () => {
   const projects = useSelector((state) => state)
@@ -37,7 +37,7 @@ const ProjectContainer = () => {
   return (
     <div>
       <button onClick={() => getRandomProject()}>random</button>
-      {randomProject ? <SingleProject project={randomProject} /> : null}
+      {randomProject ? <RandomProjectCard project={randomProject} /> : null}
       <List divided relaxed size="large">
         {projectRow()}
       </List>
