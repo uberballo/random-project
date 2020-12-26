@@ -15,6 +15,7 @@ func Routes(router *gin.Engine) {
 		api.GET("/projects", v1.GetProjects)
 		api.POST("/projects", v1.CreateProject)
 		api.DELETE("/projects/:id", v1.DeleteProject)
+		api.POST("/user", v1.CreateUser)
 	}
 	router.NoRoute(notFound)
 }

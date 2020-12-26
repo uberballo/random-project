@@ -1,11 +1,13 @@
 import React from 'react'
+import { Container } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const SingleProject = ({ project }) => {
   return (
-    <div className="singleProject">
-      <p className="projectTitle">{project.title}</p>
+    <Container className="singleProject">
+      <Link to={`/project/${project.ID}`}>{project.title}</Link>
       <p className="projectBody">{project.body}</p>
-    </div>
+    </Container>
   )
 }
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { List } from 'semantic-ui-react'
 import { REMOVE_PROJECT } from '../constants/ActionTypes'
 import projectService from '../services/projectService'
-import Project from './Project'
+import ProjectCard from './ProjectCard'
 import RandomProjectCard from './RandomProjectCard'
 
 const ProjectContainer = () => {
@@ -26,7 +26,7 @@ const ProjectContainer = () => {
 
   const projectRow = () => {
     return projects?.map((project) => (
-      <Project
+      <ProjectCard
         project={project}
         key={project.ID}
         removeProject={removeProject}

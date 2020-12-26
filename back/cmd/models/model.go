@@ -36,5 +36,6 @@ func Setup() {
 	}
 
 	db.AutoMigrate(&Project{})
+	db.AutoMigrate(&User{})
 
 }

@@ -13,10 +13,11 @@ const Project = ({ project, removeProject }) => {
         >
           Remove
         </Button>
-        <List.Header>{project.title}</List.Header>
-        <li>
-          <Link to={`/project/${project.ID}`}>project</Link>
-        </li>
+        <List.Header>
+          <li>
+            <Link to={`/project/${project.ID}`}>{project.title}</Link>
+          </li>
+        </List.Header>
         <List.Description>{project.description}</List.Description>
       </List.Content>
     </List.Item>
