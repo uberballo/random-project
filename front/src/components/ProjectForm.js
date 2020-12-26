@@ -1,30 +1,34 @@
 import React from 'react'
+import { Input, Form, TextArea, Button } from 'semantic-ui-react'
 
-const ProjectForm = ({ title, body, description, handleSubmit }) => {
+const ProjectForm = ({ title, description, body, handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title:</label>
-        <input
-          placeholder={'Enter project name here!'}
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Field
+          control={Input}
+          label="title"
           value={title.value}
           onChange={title.onChange}
         />
-        <label>Description:</label>
-        <input
-          placeholder={'Enter short project description here'}
+        <Form.Field
+          control={Input}
+          label="description"
           value={description.value}
           onChange={description.onChange}
         />
-        <label>Body:</label>
-        <input
-          placeholder={'Explain the project here: '}
+      </Form.Group>
+      <Form.Group>
+        <Form.Field
+          control={TextArea}
+          label="Body"
+          placeholder="Tell us more about the project"
           value={body.value}
           onChange={body.onChange}
         />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+      </Form.Group>
+      <Form.Field control={Button}>Submit</Form.Field>
+    </Form>
   )
 }
 

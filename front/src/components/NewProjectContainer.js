@@ -8,8 +8,8 @@ import { ADD_NEW_PROJECT } from '../constants/ActionTypes'
 
 const NewProjectContainer = () => {
   const title = useField('text')
-  const body = useField('text')
   const description = useField('text')
+  const body = useField('text')
   const dispatch = useDispatch()
 
   const resetFields = (fields) => {
@@ -25,7 +25,7 @@ const NewProjectContainer = () => {
     if (res.error) return
     const addedProject = res.data.data
     dispatch({ type: ADD_NEW_PROJECT, data: addedProject })
-    resetFields([title, body])
+    resetFields([title, description, body])
   }
 
   return (

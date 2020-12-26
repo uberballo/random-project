@@ -5,6 +5,7 @@ import NewProjectContainer from './components/NewProjectContainer'
 import ProjectContainer from './components/ProjectContainer'
 import { ADD_NEW_PROJECT } from './constants/ActionTypes'
 import projectService from './services/projectService'
+import 'semantic-ui-css/semantic.min.css'
 
 const App = () => {
   const dispatch = useDispatch()
