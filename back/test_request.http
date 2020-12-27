@@ -6,7 +6,17 @@ content-type: application/json
     "Password": "testi"
 }
 ###
+POST http://localhost:3001/api/login HTTP/1.1
+content-type: application/json
 
+{
+    "Username": "sample",
+    "Password": "testi"
+}
+###
+
+GET http://localhost:3001/api/user HTTP/1.1
+###
 POST http://localhost:3001/api/projects HTTP/1.1
 content-type: application/json
 
@@ -15,3 +25,4 @@ content-type: application/json
     "Description": "testi",
     "Body": "testi"
 }
+

@@ -10,12 +10,12 @@ import (
 	"github.com/uberballo/random-project/cmd/service/user_service"
 )
 
-type CreateUserForm struct {
+type LoginUserForm struct {
 	Username string `form:"username" valid:"Required;MaxSize(100)"`
 	Password string `form:"password" valid:"Required;MaxSize(255)"`
 }
 
-func CreateUser(c *gin.Context) {
+func Login(c *gin.Context) {
 	var (
 		appG = app.Gin{C: c}
 		form CreateUserForm
@@ -28,14 +28,23 @@ func CreateUser(c *gin.Context) {
 		Password: form.Password,
 	}
 	exists := userService.CheckIfUserExists()
-	if exists != nil {
-		appG.Response(http.StatusOK, e.ERROR_USER_ALREADY_EXISTS, nil)
+	fmt.Println("Käyttäjä: ", exists)
+	if exists == nil {
+		appG.Response(http.StatusOK, e.ERROR_USER_DOESNT_EXIST, nil)
 		return
 	}
-	createdUser, err := userService.Create()
+	fmt.Println("1")
+	matches, err := userService.Login()
+	fmt.Println(err)
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
-	appG.Response(http.StatusCreated, e.SUCCESS, createdUser)
+	fmt.Println("2")
+	if !matches {
+		appG.Response(http.StatusInternalServerError, e.ERROR_INVALID_PASSWORD, nil)
+		return
+
+	}
+	appG.Response(http.StatusCreated, e.SUCCESS, nil)
 }

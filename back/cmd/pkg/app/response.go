@@ -2,6 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/uberballo/random-project/cmd/pkg/e"
 )
 
 type Gin struct {
@@ -17,7 +18,7 @@ type Response struct {
 func (g *Gin) Response(httpCode, errCode int, data interface{}) {
 	g.C.JSON(httpCode, Response{
 		Code: errCode,
-		Msg:  "ok",
+		Msg:  e.GetMessage(errCode),
 		Data: data,
 	})
 	return
