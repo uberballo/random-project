@@ -34,17 +34,15 @@ func Login(c *gin.Context) {
 		return
 	}
 	fmt.Println("1")
-	matches, err := userService.Login()
-	fmt.Println(err)
+	token, err := userService.Login()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
-	fmt.Println("2")
-	if !matches {
+	if token == nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR_INVALID_PASSWORD, nil)
 		return
 
 	}
-	appG.Response(http.StatusCreated, e.SUCCESS, nil)
+	appG.Response(http.StatusCreated, e.SUCCESS, token)
 }

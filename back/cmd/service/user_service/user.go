@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/uberballo/random-project/cmd/models"
+	"github.com/uberballo/random-project/cmd/pkg/util"
 )
 
 type User struct {
@@ -29,14 +30,24 @@ func (u *User) Create() (*models.User, error) {
 	return createdUser, err
 }
 
-func (u *User) Login() (bool, error) {
+func createUserToken(username string) (*string, error) {
+	password, err := util.CreateToken(username)
+	if err != nil {
+		return nil, err
+	}
+	return &password, nil
+}
+
+func (u *User) Login() (*string, error) {
 	foundUser, err := models.GetUser(u.Username)
 	if err != nil {
-		return false, err
+		return nil, err
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(foundUser.HashPassword), []byte(u.Password))
 	passwordMatches := (err == nil)
-
-	return passwordMatches, nil
+	if passwordMatches {
+		return createUserToken(u.Username)
+	}
+	return nil, nil
 }
