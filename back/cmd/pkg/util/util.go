@@ -4,5 +4,5 @@ import "os"
 
 func Setup() {
 	LoadEnv()
-	jwtSecret = []byte(os.Getenv("JwtSecret"))
+	jwtSecret = []byte(os.Getenv("JWTSECRET"))
 }
