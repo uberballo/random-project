@@ -6,9 +6,9 @@ import projectService from '../services/projectService'
 import ProjectForm from './ProjectForm'
 
 const NewProjectContainer = () => {
-  const title = useField('text')
-  const description = useField('text')
-  const body = useField('text')
+  const titleField = useField('text')
+  const descriptionField = useField('text')
+  const bodyField = useField('text')
   const dispatch = useDispatch()
 
   const resetFields = (fields) => {
@@ -19,24 +19,24 @@ const NewProjectContainer = () => {
     e.preventDefault()
 
     const newProject = {
-      title: title.value,
-      description: description.value,
-      body: body.value,
+      title: titleField.value,
+      description: descriptionField.value,
+      body: bodyField.value,
     }
     const res = await projectService.createProject(newProject)
 
     if (res.error) return
     const addedProject = res.data.data
     dispatch({ type: projectConstants.ADD_NEW_PROJECT, data: addedProject })
-    resetFields([title, description, body])
+    resetFields([titleField, descriptionField, bodyField])
   }
 
   return (
     <ProjectForm
       handleSubmit={handleSubmit}
-      title={title}
-      description={description}
-      body={body}
+      title={titleField}
+      description={descriptionField}
+      body={bodyField}
     />
   )
 }

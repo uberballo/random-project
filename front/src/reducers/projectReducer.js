@@ -1,4 +1,4 @@
-import { projectConstants } from '../constants/project.constants'
+import { projectConstants } from '../constants'
 
 const removeProjectFromState = (state, action) => {
   const toRemoveId = action.filter

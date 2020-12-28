@@ -7,9 +7,9 @@ import { Container, Header } from 'semantic-ui-react'
 const SingleProject = () => {
   const { projectID } = useParams()
   const project = useSelector((state) =>
-    state.find((project) => (project.ID = projectID))
+    state.projects.find((project) => project.ID === Number(projectID))
   )
-
+  console.log(project)
   if (!project) {
     return <LoadingSpinner />
   }

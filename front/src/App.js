@@ -7,6 +7,7 @@ import NewProjectContainer from './components/NewProjectContainer'
 import ProjectContainer from './components/ProjectContainer'
 import { projectConstants } from './constants'
 import projectService from './services/projectService'
+import LoginContainer from './components/LoginContainer'
 import { Container } from 'semantic-ui-react'
 import SingleProjectCard from './components/SingleProjectCard'
 
@@ -38,6 +39,9 @@ const App = () => {
           </Route>
           <Route path="/project/:projectID">
             <SingleProjectCard />
+          </Route>
+          <Route exact path="/login">
+            <LoginContainer />
           </Route>
         </Switch>
       </Container>

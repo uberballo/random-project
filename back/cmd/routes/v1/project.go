@@ -17,7 +17,7 @@ func GetProjects(c *gin.Context) {
 	data["projects"] = projects
 	appG.Response(
 		http.StatusOK,
-		1,
+		e.SUCCESS,
 		data)
 }
 

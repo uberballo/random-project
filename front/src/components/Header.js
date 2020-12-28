@@ -10,6 +10,9 @@ const Header = () => {
       <Menu.Item link href="/project/new">
         New project
       </Menu.Item>
+      <Menu.Item link href="/login">
+        Login
+      </Menu.Item>
     </Menu>
   )
 }

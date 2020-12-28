@@ -1,17 +1,7 @@
 import axios from 'axios'
+import tryCatchWrapper from '../util/axiosWrapper'
 
 const baseUrl = '/api/projects'
-
-const tryCatchWrapper = async (func) => {
-  try {
-    const res = await func()
-    return res
-  } catch (e) {
-    return {
-      error: e,
-    }
-  }
-}
 
 const getProjects = async () => {
   const res = await tryCatchWrapper(() => axios.get(baseUrl))
