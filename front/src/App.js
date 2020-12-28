@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import Header from './components/Header'
 import NewProjectContainer from './components/NewProjectContainer'
 import ProjectContainer from './components/ProjectContainer'
-import { ADD_NEW_PROJECT } from './constants/ActionTypes'
+import { projectConstants } from './constants'
 import projectService from './services/projectService'
 import { Container } from 'semantic-ui-react'
 import SingleProjectCard from './components/SingleProjectCard'
@@ -19,7 +19,7 @@ const App = () => {
       const projects = result.data.projects
       console.log(result)
       if (!result.error) {
-        dispatch({ type: ADD_NEW_PROJECT, data: projects })
+        dispatch({ type: projectConstants.ADD_NEW_PROJECT, data: projects })
       }
     }
 

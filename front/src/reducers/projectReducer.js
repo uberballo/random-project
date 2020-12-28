@@ -1,4 +1,4 @@
-import { ADD_NEW_PROJECT, REMOVE_PROJECT } from '../constants/ActionTypes'
+import { projectConstants } from '../constants/project.constants'
 
 const removeProjectFromState = (state, action) => {
   const toRemoveId = action.filter
@@ -6,11 +6,11 @@ const removeProjectFromState = (state, action) => {
   return filteredState
 }
 
-const projectReducer = (state = [], action) => {
+export const projectReducer = (state = [], action) => {
   switch (action.type) {
-    case ADD_NEW_PROJECT:
+    case projectConstants.ADD_NEW_PROJECT:
       return state.concat(action.data)
-    case REMOVE_PROJECT:
+    case projectConstants.REMOVE_PROJECT:
       return removeProjectFromState(state, action)
     default:
       return state
