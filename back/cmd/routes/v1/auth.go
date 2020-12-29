@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,27 +21,35 @@ func Login(c *gin.Context) {
 	)
 
 	httpCode, errCode := app.BindAndValid(c, &form)
-	fmt.Println(httpCode, errCode)
+	if errCode != e.SUCCESS {
+		appG.Response(httpCode, errCode, nil)
+		return
+	}
+
 	userService := user_service.User{
 		Username: form.Username,
 		Password: form.Password,
 	}
 	exists := userService.CheckIfUserExists()
-	fmt.Println("Käyttäjä: ", exists)
+
 	if exists == nil {
 		appG.Response(http.StatusOK, e.ERROR_USER_DOESNT_EXIST, nil)
 		return
 	}
-	fmt.Println("1")
+
 	token, err := userService.Login()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
+
 	if token == nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR_INVALID_PASSWORD, nil)
 		return
 
 	}
-	appG.Response(http.StatusCreated, e.SUCCESS, token)
+	appG.Response(http.StatusCreated, e.SUCCESS, map[string]string{
+		"token":    *token,
+		"username": form.Username,
+	})
 }

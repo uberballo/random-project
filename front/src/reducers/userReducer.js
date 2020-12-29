@@ -11,21 +11,17 @@ export const userReducer = (
 ) => {
   switch (action.type) {
     case userConstants.LOGIN:
-      console.log('Login')
-      console.log(state)
       return {
         loggedIn: true,
         user: action.data,
       }
     case userConstants.LOGOUT:
-      console.log('logout')
       localStorage.clear()
       return {
         loggedIn: false,
         user: '',
       }
     default:
-      console.log(state)
       return state
   }
 }
