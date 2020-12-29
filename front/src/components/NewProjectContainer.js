@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { projectConstants } from '../constants/project.constants'
+import { projectConstants } from '../constants'
 import useField from '../helpers/useField'
 import projectService from '../services/projectService'
 import ProjectForm from './ProjectForm'
@@ -25,8 +25,8 @@ const NewProjectContainer = () => {
     }
     const res = await projectService.createProject(newProject)
 
-    if (res.error) return
-    const addedProject = res.data.data
+    if (res.code != 200) return
+    const addedProject = res.data
     dispatch({ type: projectConstants.ADD_NEW_PROJECT, data: addedProject })
     resetFields([titleField, descriptionField, bodyField])
   }

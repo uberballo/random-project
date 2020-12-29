@@ -8,7 +8,7 @@ const logUserIn = async (userInfo) => {
     username: userInfo.username,
     password: userInfo.password,
   })
-  console.log('loginService ', res)
+  return res.data
 }
 
 export default { logUserIn }

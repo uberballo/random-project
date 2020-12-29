@@ -1,11 +1,15 @@
-import Login from './Login'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { userConstants } from '../constants'
 import useField from '../helpers/useField'
 import userService from '../services/userService'
+import Login from './Login'
 
-const LoginContainer = () => {
+const LoginContainer = withRouter(({ history }) => {
   const usernameField = useField('text')
   const passwordField = useField('text')
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -14,6 +18,18 @@ const LoginContainer = () => {
       password: passwordField.value,
     }
     const res = await userService.logUserIn(userInfo)
+    if (res.code == 200) {
+      console.log('here')
+      dispatch({
+        type: userConstants.LOGIN,
+        data: res.data,
+      })
+      window.localStorage.setItem(
+        'loggedUser',
+        JSON.stringify(res.data)
+      )
+      history.push('/')
+    }
     console.log(res)
   }
 
@@ -24,5 +40,5 @@ const LoginContainer = () => {
       password={passwordField}
     />
   )
-}
+})
 export default LoginContainer

@@ -16,7 +16,7 @@ const createProject = async (newProject) => {
       Body: newProject.body,
     })
   )
-  return res
+  return res.data
 }
 
 const removeProject = async (id) => {
