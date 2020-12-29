@@ -1,7 +1,5 @@
 package models
 
-import "fmt"
-
 type Project struct {
 	Model
 	Title       string `json:"title"`
@@ -29,8 +27,16 @@ func CreateProject(data map[string]interface{}) (*Project, error) {
 	return &project, nil
 }
 
+func GetProject(id string) (*Project, error) {
+	var project Project
+	err := db.Where("id = ?", id).Find(&project).Error
+	if err != nil {
+		return nil, err
+	}
+	return &project, nil
+}
+
 func DeleteProject(id string) {
 	var project Project
-	result := db.Where("id = ?", id).Delete(&project)
-	fmt.Println("Delete, ", result)
+	db.Where("id = ?", id).Delete(&project)
 }

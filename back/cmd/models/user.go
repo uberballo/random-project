@@ -6,8 +6,9 @@ import (
 
 type User struct {
 	Model
-	Username     string `json:"username`
-	HashPassword string `json:"password`
+	Username       string    `json:"username`
+	HashPassword   string    `json:"password`
+	ChosenProjects []Project `gorm:"many2many:user_chosenProjects;"`
 }
 
 func CheckIfUserExists(username string) bool {
@@ -35,7 +36,48 @@ func CreateUser(data map[string]interface{}) (*User, error) {
 	return &user, nil
 }
 
-func GetUser(username string) (*User, error) {
+func AddChosenProjectToUser(username, projectId string) error {
+	user, err := GetUserWithUsername(username)
+	if err != nil {
+		return err
+	}
+	project, err := GetProject(projectId)
+	if err != nil {
+		return err
+	}
+	err = db.Model(&user).Association("ChosenProjects").Append([]Project{*project})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func AddChosenProjectToUserWithId(userId, projectId string) error {
+	user, err := GetUserWithID(userId)
+	if err != nil {
+		return err
+	}
+	project, err := GetProject(projectId)
+	if err != nil {
+		return err
+	}
+	err = db.Model(&user).Association("ChosenProjects").Append(&project)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetUserWithID(id string) (*User, error) {
+	var user User
+	err := db.Where("id = ?", id).First(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func GetUserWithUsername(username string) (*User, error) {
 	var user User
 	err := db.Where("username = ?", username).First(&user).Error
 	if err != nil {

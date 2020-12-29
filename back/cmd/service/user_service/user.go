@@ -38,8 +38,13 @@ func createUserToken(username string) (*string, error) {
 	return &password, nil
 }
 
+func AddChosenProject(username, projectId string) error {
+	err := models.AddChosenProjectToUser(username, projectId)
+	return err
+}
+
 func (u *User) Login() (*string, error) {
-	foundUser, err := models.GetUser(u.Username)
+	foundUser, err := models.GetUserWithUsername(u.Username)
 	if err != nil {
 		return nil, err
 	}
