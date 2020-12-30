@@ -18,6 +18,7 @@ import {
   projectConstants,
   userConstants,
 } from './constants'
+import { setToken } from './services'
 import projectService from './services/projectService'
 
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
         type: userConstants.LOGIN,
         data: user,
       })
+      setToken(loggedUserJSON)
     }
   }
 

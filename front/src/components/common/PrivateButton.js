@@ -7,9 +7,9 @@ const CustomButton = ({
   className,
   func,
   params,
+  toShow = true,
 }) => {
-  const user = useSelector((state) => state.user)
-  return user.loggedIn ? (
+  return toShow ? (
     <Button
       className={className}
       onClick={() => func(params)}

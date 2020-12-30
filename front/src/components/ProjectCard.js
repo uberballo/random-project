@@ -2,6 +2,8 @@ import React from 'react'
 import { List } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import CustomButton from './common/PrivateButton'
+import { addProjectToUser } from '../services/userService'
+import { isLoggedIn } from '../helpers/auth'
 import '../styles/project.css'
 
 const Project = ({ project, removeProject }) => {
@@ -13,6 +15,14 @@ const Project = ({ project, removeProject }) => {
           className="remove-button"
           func={removeProject}
           params={project.ID}
+          toShow={isLoggedIn}
+        />
+        <CustomButton
+          label="Add"
+          className="add-button"
+          func={addProjectToUser}
+          params={project.ID}
+          toShow={isLoggedIn}
         />
         <List.Header>
           <li>

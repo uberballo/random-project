@@ -2,8 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { userConstants } from '../constants'
+import { setToken } from '../services'
 import useField from '../helpers/useField'
-import userService from '../services/userService'
+import userService from '../services/authService'
 import Login from './Login'
 
 const LoginContainer = withRouter(({ history }) => {
@@ -24,6 +25,7 @@ const LoginContainer = withRouter(({ history }) => {
         type: userConstants.LOGIN,
         data: res.data,
       })
+      setToken(res.data)
       window.localStorage.setItem(
         'loggedUser',
         JSON.stringify(res.data)
