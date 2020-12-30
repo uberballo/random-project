@@ -35,7 +35,7 @@ const Header = () => {
         label="Log out"
         className="logout-button"
         func={logUserOut}
-        toShow={isLoggedIn}
+        toShow={isLoggedIn()}
       />
     </Menu>
   )

@@ -15,14 +15,14 @@ const Project = ({ project, removeProject }) => {
           className="remove-button"
           func={removeProject}
           params={project.ID}
-          toShow={isLoggedIn}
+          toShow={isLoggedIn()}
         />
         <CustomButton
           label="Add"
           className="add-button"
           func={addProjectToUser}
           params={project.ID}
-          toShow={isLoggedIn}
+          toShow={isLoggedIn()}
         />
         <List.Header>
           <li>
