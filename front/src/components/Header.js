@@ -1,6 +1,9 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
+import { logUserOut } from '../services/authService'
+import { isLoggedIn } from '../helpers/auth'
+import CustomButton from './common/PrivateButton'
 
 const Header = () => {
   const NotLoggedInLink = ({ name, path }) => {
@@ -28,6 +31,12 @@ const Header = () => {
       </Menu.Item>
       <NotLoggedInLink name="Login" path="/login" />
       <LoggedInLink name="Profile" path="/profile" />
+      <CustomButton
+        label="Log out"
+        className="logout-button"
+        func={logUserOut}
+        toShow={isLoggedIn}
+      />
     </Menu>
   )
 }

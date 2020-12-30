@@ -7,7 +7,7 @@ import {
   Switch,
 } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { Container } from 'semantic-ui-react'
+import { Container, FormTextArea } from 'semantic-ui-react'
 import Header from './components/Header'
 import LoginContainer from './components/LoginContainer'
 import NewProjectContainer from './components/NewProjectContainer'
@@ -19,6 +19,7 @@ import {
   userConstants,
 } from './constants'
 import { setToken } from './services'
+import { logInUser } from './services/authService'
 import projectService from './services/projectService'
 
 const App = () => {
@@ -40,16 +41,11 @@ const App = () => {
   }
 
   const fetchUserFromLocalStorage = () => {
-    const loggedUserJSON = window.localStorage.getItem(
-      'loggedUser'
+    const loggedUser = JSON.parse(
+      window.localStorage.getItem('loggedUser')
     )
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      dispatch({
-        type: userConstants.LOGIN,
-        data: user,
-      })
-      setToken(loggedUserJSON)
+    if (loggedUser) {
+      logInUser(loggedUser)
     }
   }
 

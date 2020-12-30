@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/uberballo/random-project/cmd/pkg/app"
 	"github.com/uberballo/random-project/cmd/pkg/e"
+	"github.com/uberballo/random-project/cmd/pkg/util"
 	"github.com/uberballo/random-project/cmd/service/user_service"
 )
 
@@ -41,8 +42,7 @@ func CreateUser(c *gin.Context) {
 }
 
 type AddChosenProjectForm struct {
-	Username  string `form:"username" valid:"Required;MaxSize(100)"`
-	ProjectID string `form:"projectID" valid:"Required;MaxSize(255)"`
+	ProjectID int `form:"projectID" valid:"Required"`
 }
 
 func AddChosenProjectToUser(c *gin.Context) {
@@ -56,15 +56,14 @@ func AddChosenProjectToUser(c *gin.Context) {
 		appG.Response(httpCode, errCode, nil)
 		return
 	}
-
-	username := form.Username
-	projectID := form.ProjectID
-	fmt.Println(username)
-
-	err := user_service.AddChosenProject(username, projectID)
-	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR, err)
-		return
-	}
-	appG.Response(http.StatusAccepted, e.SUCCESS, nil)
+	fmt.Println(util.ExtractTokenMetadata(c.Request))
+	/*
+		projectID := form.ProjectID
+			err := user_service.AddChosenProject(username, projectID)
+			if err != nil {
+				appG.Response(http.StatusInternalServerError, e.ERROR, err)
+				return
+			}
+			appG.Response(http.StatusAccepted, e.SUCCESS, nil)
+	*/
 }
