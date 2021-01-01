@@ -57,6 +57,11 @@ func AddChosenProjectToUser(c *gin.Context) {
 		return
 	}
 	fmt.Println(util.ExtractTokenMetadata(c.Request))
+	res, err := util.ExtractTokenMetadata(c.Request)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("res", res, err)
 	/*
 		projectID := form.ProjectID
 			err := user_service.AddChosenProject(username, projectID)

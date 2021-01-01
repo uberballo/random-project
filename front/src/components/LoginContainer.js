@@ -9,7 +9,6 @@ const LoginContainer = withRouter(({ history }) => {
   const passwordField = useField('text')
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
     const userInfo = {
       username: usernameField.value,
       password: passwordField.value,

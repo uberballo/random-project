@@ -21,7 +21,7 @@ func CreateToken(username string) (string, error) {
 	expireTime := now.Add(2 * time.Hour)
 
 	claims := Claims{
-		EncodeMD5(username),
+		username,
 		jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    "Random-project",
@@ -76,7 +76,6 @@ type TokenMetadata struct {
 
 func ExtractTokenMetadata(r *http.Request) (*TokenMetadata, error) {
 	token, err := DecodeToken(r)
-	fmt.Println(token)
 	if err != nil {
 		return nil, err
 	}

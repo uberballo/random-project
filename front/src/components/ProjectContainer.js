@@ -10,6 +10,8 @@ const ProjectContainer = () => {
   const projects = useSelector((state) => state.projects)
   const [randomProject, setRandomProject] = useState({})
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
+  const isLoggedIn = user.loggedIn
 
   const removeProject = async (projectId) => {
     const res = await projectService.removeProject(
@@ -36,6 +38,7 @@ const ProjectContainer = () => {
         project={project}
         key={project.ID}
         removeProject={removeProject}
+        loggedIn={isLoggedIn}
       />
     ))
   }

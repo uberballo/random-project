@@ -3,10 +3,15 @@ import { List } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import CustomButton from './common/PrivateButton'
 import { addProjectToUser } from '../services/userService'
+import { useSelector } from 'react-redux'
 import { isLoggedIn } from '../helpers/auth'
 import '../styles/project.css'
 
-const Project = ({ project, removeProject }) => {
+const ProjectCard = ({
+  project,
+  removeProject,
+  loggedIn,
+}) => {
   return (
     <List.Item>
       <List.Content>
@@ -15,14 +20,14 @@ const Project = ({ project, removeProject }) => {
           className="remove-button"
           func={removeProject}
           params={project.ID}
-          toShow={isLoggedIn()}
+          toShow={loggedIn}
         />
         <CustomButton
           label="Add"
           className="add-button"
           func={addProjectToUser}
           params={project.ID}
-          toShow={isLoggedIn()}
+          toShow={loggedIn}
         />
         <List.Header>
           <li>
@@ -39,4 +44,4 @@ const Project = ({ project, removeProject }) => {
   )
 }
 
-export default Project
+export default ProjectCard
