@@ -38,7 +38,7 @@ func createUserToken(username string) (*string, error) {
 	return &password, nil
 }
 
-func AddChosenProject(username, projectId string) error {
+func AddChosenProject(username string, projectId int) error {
 	err := models.AddChosenProjectToUser(username, projectId)
 	return err
 }

@@ -27,7 +27,7 @@ func CreateProject(data map[string]interface{}) (*Project, error) {
 	return &project, nil
 }
 
-func GetProject(id string) (*Project, error) {
+func GetProject(id int) (*Project, error) {
 	var project Project
 	err := db.Where("id = ?", id).Find(&project).Error
 	if err != nil {

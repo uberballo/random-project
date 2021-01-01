@@ -59,16 +59,16 @@ func AddChosenProjectToUser(c *gin.Context) {
 	fmt.Println(util.ExtractTokenMetadata(c.Request))
 	res, err := util.ExtractTokenMetadata(c.Request)
 	if err != nil {
-		fmt.Println(err)
+		appG.Response(httpCode, errCode, err)
 	}
-	fmt.Println("res", res, err)
-	/*
-		projectID := form.ProjectID
-			err := user_service.AddChosenProject(username, projectID)
-			if err != nil {
-				appG.Response(http.StatusInternalServerError, e.ERROR, err)
-				return
-			}
-			appG.Response(http.StatusAccepted, e.SUCCESS, nil)
-	*/
+	username := res.Username
+	projectID := form.ProjectID
+
+	err = user_service.AddChosenProject(username, projectID)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.ERROR, err)
+		return
+	}
+	appG.Response(http.StatusAccepted, e.SUCCESS, nil)
+
 }

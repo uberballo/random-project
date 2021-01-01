@@ -71,7 +71,7 @@ func ValidateToken(r *http.Request) error {
 }
 
 type TokenMetadata struct {
-	username string
+	Username string
 }
 
 func ExtractTokenMetadata(r *http.Request) (*TokenMetadata, error) {
@@ -81,12 +81,12 @@ func ExtractTokenMetadata(r *http.Request) (*TokenMetadata, error) {
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if ok && token.Valid {
-		username, ok := claims["username"].(string)
+		username, ok := claims["Username"].(string)
 		if !ok {
 			return nil, err
 		}
 		return &TokenMetadata{
-			username: username,
+			Username: username,
 		}, nil
 	}
 	return nil, err

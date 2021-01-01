@@ -6,7 +6,7 @@ import (
 
 type User struct {
 	Model
-	Username       string    `json:"username`
+	Username       string    `gorm:"unique" json:"username`
 	HashPassword   string    `json:"password`
 	ChosenProjects []Project `gorm:"many2many:user_chosenProjects;"`
 }
@@ -36,7 +36,7 @@ func CreateUser(data map[string]interface{}) (*User, error) {
 	return &user, nil
 }
 
-func AddChosenProjectToUser(username, projectId string) error {
+func AddChosenProjectToUser(username string, projectId int) error {
 	user, err := GetUserWithUsername(username)
 	if err != nil {
 		return err
@@ -52,7 +52,7 @@ func AddChosenProjectToUser(username, projectId string) error {
 	return nil
 }
 
-func AddChosenProjectToUserWithId(userId, projectId string) error {
+func AddChosenProjectToUserWithId(userId string, projectId int) error {
 	user, err := GetUserWithID(userId)
 	if err != nil {
 		return err
