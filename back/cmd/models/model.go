@@ -1,12 +1,9 @@
 package models
 
 import (
-	"fmt"
-	"log"
 	"time"
 
 	"github.com/uberballo/random-project/cmd/database"
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -19,21 +16,8 @@ type Model struct {
 	DeletedOn  gorm.DeletedAt `gorm:"index"`
 }
 
-// Setup initializes the database instance
 func Setup() {
-	var err error
-	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		database.DatabaseSetting.Host,
-		5432,
-		database.DatabaseSetting.User,
-		database.DatabaseSetting.Password,
-		database.DatabaseSetting.Name)
-
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
-	if err != nil {
-		log.Fatalf("models.Setup  errr: %v", err)
-	}
+	db = database.GetDB()
 
 	db.AutoMigrate(&Project{})
 	db.AutoMigrate(&User{})

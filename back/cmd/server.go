@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"log"
@@ -12,11 +12,18 @@ import (
 
 func init() {
 	database.Setup()
+	database.CreateDB()
 	models.Setup()
 	util.Setup()
 }
-func main() {
+
+func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	routes.Routes(router)
+	return router
+}
+
+func Run() {
+	router := SetupRouter()
 	log.Fatal(router.Run(":3001"))
 }

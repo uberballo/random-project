@@ -10,6 +10,8 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/joho/godotenv v1.3.0
 	github.com/mibk/dupl v1.0.0 // indirect
+	github.com/micro/micro/v2 v2.9.3
+	github.com/stretchr/testify v1.5.1
 	go.mongodb.org/mongo-driver v1.4.1
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	gorm.io/driver/postgres v1.0.5
