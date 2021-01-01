@@ -1,26 +1,25 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
-import { logUserOut } from '../services/authService'
+import authService from '../services/authService'
 import { isLoggedIn } from '../helpers/auth'
 import CustomButton from './common/PrivateButton'
 
 const Header = () => {
   const NotLoggedInLink = ({ name, path }) => {
-    return user.loggedIn ? null : (
+    return isLoggedIn ? null : (
       <Menu.Item link href={path}>
         {name}
       </Menu.Item>
     )
   }
   const LoggedInLink = ({ name, path }) => {
-    return user.loggedIn ? (
+    return isLoggedIn ? (
       <Menu.Item link href={path}>
         {name}
       </Menu.Item>
     ) : null
   }
-  const user = useSelector((state) => state.user)
+
   return (
     <Menu>
       <Menu.Item link href="/">
@@ -34,8 +33,8 @@ const Header = () => {
       <CustomButton
         label="Log out"
         className="logout-button"
-        func={logUserOut}
-        toShow={isLoggedIn()}
+        func={authService.logUserOut}
+        toShow={isLoggedIn}
       />
     </Menu>
   )

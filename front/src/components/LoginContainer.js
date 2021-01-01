@@ -1,8 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { userConstants } from '../constants'
-import { setToken } from '../services'
 import useField from '../helpers/useField'
 import authService from '../services/authService'
 import Login from './Login'
@@ -10,7 +7,6 @@ import Login from './Login'
 const LoginContainer = withRouter(({ history }) => {
   const usernameField = useField('text')
   const passwordField = useField('text')
-  const dispatch = useDispatch()
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Redirect,
@@ -7,26 +7,20 @@ import {
   Switch,
 } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { Container, FormTextArea } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import Header from './components/Header'
 import LoginContainer from './components/LoginContainer'
 import NewProjectContainer from './components/NewProjectContainer'
 import ProfileContainer from './components/ProfileContainer'
 import ProjectContainer from './components/ProjectContainer'
 import SingleProjectCard from './components/SingleProjectCard'
-import {
-  projectConstants,
-  userConstants,
-} from './constants'
-import { setToken } from './services'
-import { logInUser } from './services/authService'
+import { projectConstants } from './constants'
+import { isLoggedIn } from './helpers/auth'
+import authService from './services/authService'
 import projectService from './services/projectService'
 
 const App = () => {
   const dispatch = useDispatch()
-
-  const user = useSelector((state) => state.user)
-  console.log(user)
 
   const fetchData = async () => {
     const result = await projectService.getProjects()
@@ -45,7 +39,7 @@ const App = () => {
       window.localStorage.getItem('loggedUser')
     )
     if (loggedUser) {
-      logInUser(loggedUser)
+      authService.logInUser(loggedUser)
     }
   }
 
@@ -72,14 +66,14 @@ const App = () => {
             <SingleProjectCard />
           </Route>
           <Route exact path="/profile">
-            {user.loggedIn ? (
+            {isLoggedIn() ? (
               <ProfileContainer />
             ) : (
               <Redirect to="/login" />
             )}
           </Route>
           <Route exact path="/login">
-            {user.loggedIn ? (
+            {isLoggedIn() ? (
               <Redirect to="/profile" />
             ) : (
               <LoginContainer />

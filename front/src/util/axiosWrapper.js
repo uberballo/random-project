@@ -1,4 +1,4 @@
-const tryCatchWrapper = async (func) => {
+const axiosTryCatchWrapper = async (func) => {
   try {
     const res = await func()
     return res
@@ -9,4 +9,4 @@ const tryCatchWrapper = async (func) => {
   }
 }
 
-export default tryCatchWrapper
+export default axiosTryCatchWrapper

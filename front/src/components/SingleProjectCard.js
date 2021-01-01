@@ -7,12 +7,15 @@ import { Container, Header } from 'semantic-ui-react'
 const SingleProject = () => {
   const { projectID } = useParams()
   const project = useSelector((state) =>
-    state.projects.find((project) => project.ID === Number(projectID))
+    state.projects.find(
+      (project) => project.ID === Number(projectID)
+    )
   )
-  console.log(project)
+
   if (!project) {
-    return <LoadingSpinner />
+    return <LoadingSpinner label="project" />
   }
+
   return (
     <Container className="singleProject">
       <Header as="h2">{project.title}</Header>

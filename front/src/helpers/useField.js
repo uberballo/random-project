@@ -1,5 +1,9 @@
 import { useState } from 'react'
 
+export const resetFields = (fields) => {
+  fields.forEach((field) => field.reset())
+}
+
 const useField = (type) => {
   const [value, setField] = useState('')
 

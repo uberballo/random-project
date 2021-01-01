@@ -2,7 +2,7 @@ import axios from 'axios'
 import { store } from '../index'
 import { setToken } from '.'
 import { userConstants } from '../constants'
-import tryCatchWrapper from '../util/axiosWrapper'
+import axiosTryCatchWrapper from '../util/axiosWrapper'
 
 const baseUrl = '/api/login'
 
@@ -13,7 +13,7 @@ const postLogInRequest = async (userInfo) => {
   })
   return res.data
 }
-export const logInUser = (data) => {
+const logInUser = (data) => {
   store.dispatch({
     type: userConstants.LOGIN,
     data: data.token,
@@ -26,7 +26,7 @@ export const logInUser = (data) => {
   )
 }
 
-export const logUserOut = () => {
+const logUserOut = () => {
   store.dispatch({
     type: userConstants.LOGOUT,
   })
@@ -34,4 +34,4 @@ export const logUserOut = () => {
   window.localStorage.clear()
 }
 
-export default { postLogInRequest, logInUser }
+export default { postLogInRequest, logInUser, logUserOut }

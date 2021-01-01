@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getToken } from './index'
-import tryCatchWrapper from '../util/axiosWrapper'
+import axiosTryCatchWrapper from '../util/axiosWrapper'
 import { isLoggedIn } from '../helpers/auth'
 
 const baseUrl = '/api/user/project'
@@ -13,8 +13,8 @@ export const addProjectToUser = async (projectID) => {
   const config = {
     headers: { Authorization: token },
   }
-  console.log(config)
-  const res = await tryCatchWrapper(() =>
+
+  const res = await axiosTryCatchWrapper(() =>
     axios.post(baseUrl, body, config)
   )
   return res.data
