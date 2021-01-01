@@ -1,6 +1,9 @@
 package models
 
 import (
+	"errors"
+	"fmt"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -84,4 +87,15 @@ func GetUserWithUsername(username string) (*User, error) {
 		return nil, err
 	}
 	return &user, nil
+}
+
+func GetUsersChosenProjects(user *User) ([]*Project, error) {
+	projects := []*Project{}
+	//db.Model(&user).Association("Languages").Find(&languages)
+	if err := db.Model(user).Association("ChosenProjects").Find(&projects).Error; err != nil {
+		fmt.Println(err())
+		return nil, errors.New("Error occured")
+	}
+
+	return projects, nil
 }

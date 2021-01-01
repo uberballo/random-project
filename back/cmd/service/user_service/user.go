@@ -56,3 +56,17 @@ func (u *User) Login() (*string, error) {
 	}
 	return nil, nil
 }
+
+func GetUsersChosenProjects(username string) ([]*models.Project, error) {
+	user, err := models.GetUserWithUsername(username)
+
+	if err != nil {
+		return nil, err
+	}
+
+	projects, err := models.GetUsersChosenProjects(user)
+	if err != nil {
+		return nil, err
+	}
+	return projects, nil
+}

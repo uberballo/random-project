@@ -3,7 +3,7 @@ import { getToken } from './index'
 import axiosTryCatchWrapper from '../util/axiosWrapper'
 import { isLoggedIn } from '../helpers/auth'
 
-const baseUrl = '/api/user/project'
+const baseUrl = '/api/user/project/'
 
 export const addProjectToUser = async (projectID) => {
   const body = {
@@ -15,7 +15,7 @@ export const addProjectToUser = async (projectID) => {
   }
 
   const res = await axiosTryCatchWrapper(() =>
-    axios.post(baseUrl, body, config)
+    axios.post(`${baseUrl}/chosen`, body, config)
   )
   return res.data
 }

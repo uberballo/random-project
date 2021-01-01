@@ -20,7 +20,8 @@ func Routes(router *gin.Engine) {
 		api.POST("/user", v1.CreateUser)
 		api.GET("/user", test)
 		api.POST("/login", v1.Login)
-		api.POST("/user/project", v1.AddChosenProjectToUser)
+		api.POST("/user/project/chosen", v1.AddChosenProjectToUser)
+		api.GET("/user/project/chosen", v1.GetUsersChosenProjects)
 	}
 	router.NoRoute(notFound)
 }

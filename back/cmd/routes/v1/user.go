@@ -57,11 +57,11 @@ func AddChosenProjectToUser(c *gin.Context) {
 		return
 	}
 	fmt.Println(util.ExtractTokenMetadata(c.Request))
-	res, err := util.ExtractTokenMetadata(c.Request)
+	tokenData, err := util.ExtractTokenMetadata(c.Request)
 	if err != nil {
-		appG.Response(httpCode, errCode, err)
+		appG.Response(http.StatusInternalServerError, e.ERROR, err)
 	}
-	username := res.Username
+	username := tokenData.Username
 	projectID := form.ProjectID
 
 	err = user_service.AddChosenProject(username, projectID)
@@ -71,4 +71,19 @@ func AddChosenProjectToUser(c *gin.Context) {
 	}
 	appG.Response(http.StatusAccepted, e.SUCCESS, nil)
 
+}
+
+func GetUsersChosenProjects(c *gin.Context) {
+	appG := app.Gin{C: c}
+	tokenData, err := util.ExtractTokenMetadata(c.Request)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.ERROR, err)
+	}
+	username := tokenData.Username
+	projects, err := user_service.GetUsersChosenProjects(username)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.ERROR, err)
+		return
+	}
+	appG.Response(http.StatusOK, e.SUCCESS, projects)
 }

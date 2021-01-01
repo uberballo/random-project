@@ -7,8 +7,8 @@ type Project struct {
 	Body        string `json:"body"`
 }
 
-func GetAllProjects() ([]*Project, error) {
-	projects := []*Project{}
+func GetAllProjects() ([]Project, error) {
+	projects := []Project{}
 	db.Find(&projects)
 
 	return projects, nil

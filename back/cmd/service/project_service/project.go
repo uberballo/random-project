@@ -10,8 +10,8 @@ type Project struct {
 	Body        string
 }
 
-func GetProjects() []*models.Project {
-	var projects []*models.Project
+func GetProjects() []models.Project {
+	var projects []models.Project
 
 	res, _ := models.GetAllProjects()
 	projects = res
