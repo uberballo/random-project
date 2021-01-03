@@ -4,12 +4,10 @@ import {
   Form,
   Grid,
   Header,
-  Image,
-  Message,
   Segment,
 } from 'semantic-ui-react'
 
-const Login = ({ handleSubmit, username, password }) => {
+const SignUp = ({ handleSubmit, username, password }) => {
   return (
     <Grid
       textAlign="center"
@@ -18,7 +16,7 @@ const Login = ({ handleSubmit, username, password }) => {
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-          Log-in to your account
+          Create a new account
         </Header>
         <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
@@ -41,15 +39,12 @@ const Login = ({ handleSubmit, username, password }) => {
             />
 
             <Button color="teal" fluid size="large">
-              Login
+              Signup
             </Button>
           </Segment>
         </Form>
-        <Message>
-          New to us? <a href="/signup">Sign Up</a>
-        </Message>
       </Grid.Column>
     </Grid>
   )
 }
-export default Login
+export default SignUp

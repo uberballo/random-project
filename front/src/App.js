@@ -13,6 +13,7 @@ import LoginContainer from './components/LoginContainer'
 import NewProjectContainer from './components/NewProjectContainer'
 import ProfileContainer from './components/ProfileContainer'
 import ProjectContainer from './components/ProjectContainer'
+import SignUpContainer from './components/SignUpContainer'
 import SingleProjectCard from './components/SingleProjectCard'
 import { projectConstants } from './constants'
 import { isLoggedIn } from './helpers/auth'
@@ -71,6 +72,9 @@ const App = () => {
             ) : (
               <Redirect to="/login" />
             )}
+          </Route>
+          <Route path="/signup">
+            <SignUpContainer />
           </Route>
           <Route exact path="/login">
             {isLoggedIn() ? (
